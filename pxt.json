@@ -1,0 +1,20 @@
+{
+    "name": "Coolguy_basic_extension",
+    "version": "0.0.0",
+    "description": "Coolguy basic extension",
+    "dependencies": {
+        "core": "*",
+        "neopixel": "github:Microsoft/pxt-neopixel",
+        "Coolguy_advan_extension": "github:CoolGuy-official/Microbit-advan"
+    },
+    "files": [
+        "README.md",
+        "main.ts",
+        "_locales/zh/Coolguy_basic_extension-strings.json"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": false,
+    "license": "MIT"
+}
