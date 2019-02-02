@@ -763,6 +763,8 @@ namespace Coolguy_basic {
     //% difspeed.min=0 difspeed.max=1023
     //% group=Motors
     export function exter_motor_left(difspeed: number): void {
+        if (difspeed > 1000)
+            difspeed = 1000;
         exter_motor_drive(motor_ports.J7, 500-difspeed/2, motor_dir.FWD)
         exter_motor_drive(motor_ports.J8, 500+difspeed/2, motor_dir.REV)
     }
@@ -793,6 +795,8 @@ namespace Coolguy_basic {
     //% difspeed.min=0 difspeed.max=1023
     //% group=Motors
     export function exter_motor_right(difspeed: number): void {
+        if (difspeed > 1000)
+            difspeed = 1000;
         exter_motor_drive(motor_ports.J7, 500+difspeed/2, motor_dir.FWD)
         exter_motor_drive(motor_ports.J8, 500-difspeed/2, motor_dir.REV)
     }
