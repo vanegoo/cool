@@ -760,7 +760,7 @@ namespace Coolguy_basic {
      */
     //% blockId=coolguy_extermotor_left
     //% block="let car turn left %difspeed|(differential)" 
-    //% speed.min=0 speed.max=1023
+    //% difspeed.min=0 difspeed.max=1023
     //% group=Motors
     export function exter_motor_left(difspeed: number): void {
         exter_motor_drive(motor_ports.J7, 500-difspeed/2, motor_dir.FWD)
@@ -775,7 +775,7 @@ namespace Coolguy_basic {
      */
     //% blockId=coolguy_extermotor_left1
     //% block="let car(wheels reverse) turn left %difspeed|(differential)" 
-    //% speed.min=0 speed.max=1023
+    //% difspeed.min=0 difspeed.max=1023
     //% group=Motors
     export function exter_motor_left1(difspeed: number): void {
         exter_motor_drive(motor_ports.J7, difspeed, motor_dir.REV)
@@ -790,7 +790,7 @@ namespace Coolguy_basic {
      */
     //% blockId=coolguy_extermotor_right
     //% block="let car turn right %difspeed|(differential)" 
-    //% speed.min=0 speed.max=1023
+    //% difspeed.min=0 difspeed.max=1023
     //% group=Motors
     export function exter_motor_right(difspeed: number): void {
         exter_motor_drive(motor_ports.J7, 500+difspeed/2, motor_dir.FWD)
@@ -805,7 +805,7 @@ namespace Coolguy_basic {
      */
     //% blockId=coolguy_extermotor_right1
     //% block="let car(wheels reverse) turn right %difspeed|(differential)" 
-    //% speed.min=0 speed.max=1023
+    //% difspeed.min=0 difspeed.max=1023
     //% group=Motors
     export function exter_motor_right1(difspeed: number): void {
         exter_motor_drive(motor_ports.J7, difspeed, motor_dir.FWD)
