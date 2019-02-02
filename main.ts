@@ -68,7 +68,7 @@ enum servo_ports {
  * Coolguy basic extension
  */
 //% weight=100 color=#ffc500 icon="\uf17b"
-//% groups=['GraySensors', 'NixieTube', 'IRremote', 'UltrasoundWave', 'others']
+//% groups=['GraySensors', 'NixieTube', 'IRremote', 'UltrasoundWave', 'Motors', others']
 namespace Coolguy_basic {
 
     //----------------------五灰度-----------------------------------
@@ -676,7 +676,7 @@ namespace Coolguy_basic {
     //% speed.min=0 speed.max=1023
     //% exterpin.fieldEditor="gridpicker" exterpin.fieldOptions.columns=2
     //% exterpin.fieldOptions.tooltips="false" exterpin.fieldOptions.width="150"
-    //% group=others
+    //% group=Motors
     export function exter_motor_drive(exterpin: motor_ports, speed: number, dir: motor_dir): void {
         let motor_pin1: AnalogPin;
         let motor_pin2: AnalogPin;
@@ -707,6 +707,109 @@ namespace Coolguy_basic {
                 break;
             default: break;
         }
+    }
+
+    /**
+     * Car go straight
+     * @param speed the speed of car, eg: 500
+     * left: IO5/11
+     * right: IO8/12
+     */
+    //% blockId=coolguy_extermotor_go
+    //% block="let car go straight at %speed|" 
+    //% speed.min=0 speed.max=1023
+    //% group=Motors
+    export function exter_motor_go(speed: number): void {
+        exter_motor_drive(motor_ports.J7, speed, motor_dir.FWD)
+        exter_motor_drive(motor_ports.J8, speed, motor_dir.REV)
+    }
+
+    /**
+     * Car go back
+     * @param speed the speed of car, eg: 500
+     * left: IO5/11
+     * right: IO8/12
+     */
+    //% blockId=coolguy_extermotor_back
+    //% block="let car go back at %speed|" 
+    //% speed.min=0 speed.max=1023
+    //% group=Motors
+    export function exter_motor_back(speed: number): void {
+        exter_motor_drive(motor_ports.J7, speed, motor_dir.REV)
+        exter_motor_drive(motor_ports.J8, speed, motor_dir.FWD)
+    }
+
+    /**
+     * Car stop
+     * left: IO5/11
+     * right: IO8/12
+     */
+    //% blockId=coolguy_extermotor_stop
+    //% block="let car stop" 
+    //% group=Motors
+    export function exter_motor_stop(): void {
+        exter_motor_drive(motor_ports.J7, 0, motor_dir.FWD)
+        exter_motor_drive(motor_ports.J8, 0, motor_dir.REV)
+    }
+
+    /**
+     * Car turn left(both forward)
+     * @param difspeed the differential of wheels, eg: 400
+     * left: IO5/11
+     * right: IO8/12
+     */
+    //% blockId=coolguy_extermotor_left
+    //% block="let car turn left %difspeed|(differential)" 
+    //% speed.min=0 speed.max=1023
+    //% group=Motors
+    export function exter_motor_left(difspeed: number): void {
+        exter_motor_drive(motor_ports.J7, 500-difspeed/2, motor_dir.FWD)
+        exter_motor_drive(motor_ports.J8, 500+difspeed/2, motor_dir.REV)
+    }
+
+    /**
+     * Car turn left(wheels reverse)
+     * @param difspeed the differential of wheels, eg: 400
+     * left: IO5/11
+     * right: IO8/12
+     */
+    //% blockId=coolguy_extermotor_left1
+    //% block="let car(wheels reverse) turn left %difspeed|(differential)" 
+    //% speed.min=0 speed.max=1023
+    //% group=Motors
+    export function exter_motor_left1(difspeed: number): void {
+        exter_motor_drive(motor_ports.J7, difspeed, motor_dir.REV)
+        exter_motor_drive(motor_ports.J8, difspeed, motor_dir.REV)
+    }
+
+    /**
+     * Car turn right(both forward)
+     * @param difspeed the differential of wheels, eg: 400
+     * left: IO5/11
+     * right: IO8/12
+     */
+    //% blockId=coolguy_extermotor_right
+    //% block="let car turn right %difspeed|(differential)" 
+    //% speed.min=0 speed.max=1023
+    //% group=Motors
+    export function exter_motor_right(difspeed: number): void {
+        exter_motor_drive(motor_ports.J7, 500+difspeed/2, motor_dir.FWD)
+        exter_motor_drive(motor_ports.J8, 500-difspeed/2, motor_dir.REV)
+    }
+
+    /**
+     * Car turn right(wheels reverse)
+     * @param difspeed the differential of wheels, eg: 400
+     * left: IO5/11
+     * right: IO8/12
+     */
+    //% blockId=coolguy_extermotor_right1
+    //% block="let car(wheels reverse) turn right %difspeed|(differential)" 
+    //% speed.min=0 speed.max=1023
+    //% group=Motors
+    export function exter_motor_right1(difspeed: number): void {
+        exter_motor_drive(motor_ports.J7, difspeed, motor_dir.FWD)
+        exter_motor_drive(motor_ports.J8, difspeed, motor_dir.FWD)
     }
 
     /**
