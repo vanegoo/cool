@@ -198,7 +198,7 @@ namespace Coolguy_basic {
         }
         return comdata;
     }
-
+    
     //----------------------循线模块-----------------------------------
     let SensorGray_SCL: DigitalPin;
     let SensorGray_SDA: DigitalPin;
@@ -234,11 +234,11 @@ namespace Coolguy_basic {
 
     /**
      * Set the value as comparsion for five GraySensors
-     * @param CmpNum0 the comparsion fo channel0 GraySensors, eg: 500
-     * @param CmpNum1 the comparsion fo channel1 GraySensors, eg: 500
-     * @param CmpNum2 the comparsion fo channel2 GraySensors, eg: 500
-     * @param CmpNum3 the comparsion fo channel3 GraySensors, eg: 500
-     * @param CmpNum4 the comparsion fo channel4 GraySensors, eg: 500
+     * @param CmpNum0 the comparsion fo channel0 GraySensors, eg: 400
+     * @param CmpNum1 the comparsion fo channel1 GraySensors, eg: 400
+     * @param CmpNum2 the comparsion fo channel2 GraySensors, eg: 400
+     * @param CmpNum3 the comparsion fo channel3 GraySensors, eg: 400
+     * @param CmpNum4 the comparsion fo channel4 GraySensors, eg: 400
      */
     //% blockId=SetCmpValue
     //% block="set comparsion numbers from left to right as %CmpNum0|%CmpNum1|%CmpNum2|%CmpNum3|%CmpNum4|"
@@ -483,20 +483,20 @@ namespace Coolguy_basic {
     function RightMotorSpeed(s: number) {
         // s ranges from 0 to 255
         if (s >= 0)
-            exter_motor_drive(motor_ports.J8, s * 3, motor_dir.REV)
+            exter_motor_drive(motor_ports.J8, s * 3, motor_dir.FWD)
         else {
             s = 0 - s;  //转为整数
-            exter_motor_drive(motor_ports.J8, s * 3, motor_dir.FWD)
+            exter_motor_drive(motor_ports.J8, s * 3, motor_dir.REV)
         }
     }
 
     function LeftMotorSpeed(s: number) {
         // s ranges from 0 to 255
         if (s >= 0)
-            exter_motor_drive(motor_ports.J7, s * 3, motor_dir.FWD)
+            exter_motor_drive(motor_ports.J7, s * 3, motor_dir.REV)
         else {
             s = 0 - s;  //转为整数
-            exter_motor_drive(motor_ports.J7, s * 3, motor_dir.REV)
+            exter_motor_drive(motor_ports.J7, s * 3, motor_dir.FWD)
         }
     }
 
@@ -542,6 +542,7 @@ namespace Coolguy_basic {
         SensorGray_Read();
         return DATA_BUF[num - 1];
     }
+
 
     //----------------------数码管-----------------------------------
     let Segment_SCL: DigitalPin;
@@ -1119,8 +1120,8 @@ namespace Coolguy_basic {
     //% speed.min=0 speed.max=1023
     //% group=Motors
     export function exter_motor_go(speed: number): void {
-        exter_motor_drive(motor_ports.J7, speed, motor_dir.FWD)
-        exter_motor_drive(motor_ports.J8, speed, motor_dir.REV)
+        exter_motor_drive(motor_ports.J7, speed, motor_dir.REV)
+        exter_motor_drive(motor_ports.J8, speed, motor_dir.FWD)
     }
 
     /**
@@ -1134,8 +1135,8 @@ namespace Coolguy_basic {
     //% speed.min=0 speed.max=1023
     //% group=Motors
     export function exter_motor_back(speed: number): void {
-        exter_motor_drive(motor_ports.J7, speed, motor_dir.REV)
-        exter_motor_drive(motor_ports.J8, speed, motor_dir.FWD)
+        exter_motor_drive(motor_ports.J7, speed, motor_dir.FWD)
+        exter_motor_drive(motor_ports.J8, speed, motor_dir.REV)
     }
 
     /**
@@ -1162,8 +1163,8 @@ namespace Coolguy_basic {
     //% speed.min=0 speed.max=1023
     //% group=Motors
     export function exter_motor_left(speed: number): void {
-        exter_motor_drive(motor_ports.J7, speed, motor_dir.REV)
-        exter_motor_drive(motor_ports.J8, speed, motor_dir.REV)
+        exter_motor_drive(motor_ports.J7, speed, motor_dir.FWD)
+        exter_motor_drive(motor_ports.J8, speed, motor_dir.FWD)
     }
 
     /**
@@ -1177,8 +1178,8 @@ namespace Coolguy_basic {
     //% speed.min=0 speed.max=1023
     //% group=Motors
     export function exter_motor_right(speed: number): void {
-        exter_motor_drive(motor_ports.J7, speed, motor_dir.FWD)
-        exter_motor_drive(motor_ports.J8, speed, motor_dir.FWD)
+        exter_motor_drive(motor_ports.J7, speed, motor_dir.REV)
+        exter_motor_drive(motor_ports.J8, speed, motor_dir.REV)
     }
 
     /**
