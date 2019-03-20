@@ -61,7 +61,7 @@ enum servo_ports {
     //% block="IO2"
     J3,
     //% block="IO16"
-    J4,
+    J4
 }
 
 enum CmpStr_dir {
@@ -75,7 +75,7 @@ enum CmpStr_dir {
  * Coolguy basic extension
  */
 //% weight=100 color=#ffc500 icon="\uf17b"
-//% groups=['CmpStr', WalkLine', 'NixieTube', 'IRremote', 'UltrasoundWave', 'Motors', others']
+//% groups=['CmpStr', WalkLine', 'NixieTube', 'IRremote', 'UltrasoundWave', 'Motors', 'RGB', others']
 namespace Coolguy_basic {
     //----------------------字符串比较---------------------------------
     let Cmpstring = "";
@@ -234,11 +234,11 @@ namespace Coolguy_basic {
 
     /**
      * Set the value as comparsion for five GraySensors
-     * @param CmpNum0 the comparsion fo channel0 GraySensors, eg: 400
-     * @param CmpNum1 the comparsion fo channel1 GraySensors, eg: 400
-     * @param CmpNum2 the comparsion fo channel2 GraySensors, eg: 400
-     * @param CmpNum3 the comparsion fo channel3 GraySensors, eg: 400
-     * @param CmpNum4 the comparsion fo channel4 GraySensors, eg: 400
+     * @param CmpNum0 the comparsion fo channel0 GraySensors, eg: 500
+     * @param CmpNum1 the comparsion fo channel1 GraySensors, eg: 500
+     * @param CmpNum2 the comparsion fo channel2 GraySensors, eg: 500
+     * @param CmpNum3 the comparsion fo channel3 GraySensors, eg: 500
+     * @param CmpNum4 the comparsion fo channel4 GraySensors, eg: 500
      */
     //% blockId=SetCmpValue
     //% block="set comparsion numbers from left to right as %CmpNum0|%CmpNum1|%CmpNum2|%CmpNum3|%CmpNum4|"
@@ -483,20 +483,20 @@ namespace Coolguy_basic {
     function RightMotorSpeed(s: number) {
         // s ranges from 0 to 255
         if (s >= 0)
-            exter_motor_drive(motor_ports.J8, s * 3, motor_dir.FWD)
+            exter_motor_drive(motor_ports.J8, s * 3, motor_dir.REV)
         else {
             s = 0 - s;  //转为整数
-            exter_motor_drive(motor_ports.J8, s * 3, motor_dir.REV)
+            exter_motor_drive(motor_ports.J8, s * 3, motor_dir.FWD)
         }
     }
 
     function LeftMotorSpeed(s: number) {
         // s ranges from 0 to 255
         if (s >= 0)
-            exter_motor_drive(motor_ports.J7, s * 3, motor_dir.REV)
+            exter_motor_drive(motor_ports.J7, s * 3, motor_dir.FWD)
         else {
             s = 0 - s;  //转为整数
-            exter_motor_drive(motor_ports.J7, s * 3, motor_dir.FWD)
+            exter_motor_drive(motor_ports.J7, s * 3, motor_dir.REV)
         }
     }
 
@@ -982,26 +982,50 @@ namespace Coolguy_basic {
     }
 
     //---------------------PM2.5-------------------------------------------------
-    /**
-     * PM2.5 Get
-     */
-    //% blockId=Read_PM2_5
-    //% block="PM2.5 Get"
-    //% group=others
-    export function Read_PM2_5(): number {
-        let voMeasured: number, calcVoltage: number, dustDensity: number;
+    // /**
+    //  * PM2.5 Get
+    //  */
+    // //% blockId=Read_PM2_5
+    // //% block="PM2.5 Get"
+    // //% group=others
+    // export function Read_PM2_5(): number {
+    //     let voMeasured: number, calcVoltage: number, dustDensity: number;
 
-        voMeasured = pins.analogReadPin(AnalogPin.P0); // read the dust value
-        calcVoltage = voMeasured * (5.0 / 1024.0);
-        dustDensity = 0.17 * calcVoltage - 0.1;
-        if (dustDensity < 0) 
-            dustDensity = 0.1;
+    //     voMeasured = pins.analogReadPin(AnalogPin.P0); // read the dust value
+    //     calcVoltage = voMeasured * (5.0 / 1024.0);
+    //     dustDensity = 0.17 * calcVoltage - 0.1;
+    //     if (dustDensity < 0) 
+    //         dustDensity = 0.1;
 
-        return dustDensity;
-    }
+    //     return dustDensity;
+    // }
 
     //----------------------RGB--------------------------------------------------
-    let rgb = neopixel.create(DigitalPin.P0, 1, NeoPixelMode.RGB);
+    let rgb = neopixel.create(DigitalPin.P1, 1, NeoPixelMode.RGB);
+    
+    /**
+     * RGB
+     * @param exterpin the ports component connect, eg: servo_ports.J2
+     */
+    //% blockId=coolguy_WS2812_Init
+    //% block="Set RGB port as %exterpin"
+    //% group=RGB
+    export function coolguy_WS2812_Init(exterpin: servo_ports) {
+        switch (exterpin) {
+            case servo_ports.J2:
+                rgb = neopixel.create(DigitalPin.P1, 1, NeoPixelMode.RGB);
+                break;
+            case servo_ports.J3:
+                rgb = neopixel.create(DigitalPin.P2, 1, NeoPixelMode.RGB);
+                break;
+            case servo_ports.J4:
+                rgb = neopixel.create(DigitalPin.P16, 1, NeoPixelMode.RGB);
+                break;
+            default:
+                break;
+        }
+    }
+
     /**
      * RGB
      * @param brightness the brightness when RGB on, eg: 120
@@ -1014,10 +1038,10 @@ namespace Coolguy_basic {
     //% brightness.min=0 brightness.max=255
     //% r.min=0 r.max=255 g.min=0 g.max=255 b.min=0 b.max=255 
     //% inlineInputMode=inline
-    //% group=others
-    export function coolguy_WS2812_SetRGB(brightness: number, r: number, g: number, b: number) {
+    //% group=RGB
+    export function coolguy_WS2812_SetRGB(brightness: number, r: number, g: number, b: number) {       
         rgb.setBrightness(brightness);
-        rgb.show();
+        //rgb.show();
         rgb.showColor(neopixel.rgb(r, g, b));
     }
 
@@ -1120,8 +1144,8 @@ namespace Coolguy_basic {
     //% speed.min=0 speed.max=1023
     //% group=Motors
     export function exter_motor_go(speed: number): void {
-        exter_motor_drive(motor_ports.J7, speed, motor_dir.REV)
-        exter_motor_drive(motor_ports.J8, speed, motor_dir.FWD)
+        exter_motor_drive(motor_ports.J7, speed, motor_dir.FWD)
+        exter_motor_drive(motor_ports.J8, speed, motor_dir.REV)
     }
 
     /**
@@ -1135,8 +1159,8 @@ namespace Coolguy_basic {
     //% speed.min=0 speed.max=1023
     //% group=Motors
     export function exter_motor_back(speed: number): void {
-        exter_motor_drive(motor_ports.J7, speed, motor_dir.FWD)
-        exter_motor_drive(motor_ports.J8, speed, motor_dir.REV)
+        exter_motor_drive(motor_ports.J7, speed, motor_dir.REV)
+        exter_motor_drive(motor_ports.J8, speed, motor_dir.FWD)
     }
 
     /**
@@ -1163,8 +1187,8 @@ namespace Coolguy_basic {
     //% speed.min=0 speed.max=1023
     //% group=Motors
     export function exter_motor_left(speed: number): void {
-        exter_motor_drive(motor_ports.J7, speed, motor_dir.FWD)
-        exter_motor_drive(motor_ports.J8, speed, motor_dir.FWD)
+        exter_motor_drive(motor_ports.J7, speed, motor_dir.REV)
+        exter_motor_drive(motor_ports.J8, speed, motor_dir.REV)
     }
 
     /**
@@ -1178,8 +1202,8 @@ namespace Coolguy_basic {
     //% speed.min=0 speed.max=1023
     //% group=Motors
     export function exter_motor_right(speed: number): void {
-        exter_motor_drive(motor_ports.J7, speed, motor_dir.REV)
-        exter_motor_drive(motor_ports.J8, speed, motor_dir.REV)
+        exter_motor_drive(motor_ports.J7, speed, motor_dir.FWD)
+        exter_motor_drive(motor_ports.J8, speed, motor_dir.FWD)
     }
 
     /**

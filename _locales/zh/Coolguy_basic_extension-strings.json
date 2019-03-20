@@ -21,6 +21,7 @@
   "Coolguy_basic.coolguy_IR_check|block": "红外遥控接收",
   "Coolguy_basic.coolguy_Set_Segment2|block": "数码管显示%num1|:%num2|",
   "Coolguy_basic.coolguy_Set_Segment|block": "数码管显示%num|",
+  "Coolguy_basic.coolguy_WS2812_Init|block": "设定RGB端口%exterpin",
   "Coolguy_basic.coolguy_WS2812_SetRGB|block": "亮度%brightness|红%r|绿%g|蓝%b|",
   "Coolguy_basic.exter_button|block": "当按键%pin|被松开时",
   "Coolguy_basic.exter_motor_back|block": "小车后退%speed|(速度)",
@@ -63,6 +64,7 @@
   "{id:group}IRremote": "红外遥控",
   "{id:group}Motors": "电机",
   "{id:group}NixieTube": "数码管",
+  "{id:group}RGB": "RGB",
   "{id:group}UltrasoundWave": "超声波",
   "{id:group}others": "其它"
 }
