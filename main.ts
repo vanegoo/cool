@@ -483,20 +483,20 @@ namespace Coolguy_basic {
     function RightMotorSpeed(s: number) {
         // s ranges from 0 to 255
         if (s >= 0)
-            exter_motor_drive(motor_ports.J8, s * 3, motor_dir.REV)
+            exter_motor_drive(motor_ports.J8, s * 3/4, motor_dir.REV)
         else {
             s = 0 - s;  //转为整数
-            exter_motor_drive(motor_ports.J8, s * 3, motor_dir.FWD)
+            exter_motor_drive(motor_ports.J8, s * 3/4, motor_dir.FWD)
         }
     }
 
     function LeftMotorSpeed(s: number) {
         // s ranges from 0 to 255
         if (s >= 0)
-            exter_motor_drive(motor_ports.J7, s * 3, motor_dir.FWD)
+            exter_motor_drive(motor_ports.J7, s * 3/4, motor_dir.FWD)
         else {
             s = 0 - s;  //转为整数
-            exter_motor_drive(motor_ports.J7, s * 3, motor_dir.REV)
+            exter_motor_drive(motor_ports.J7, s * 3/4, motor_dir.REV)
         }
     }
 
@@ -1093,11 +1093,11 @@ namespace Coolguy_basic {
      * Motor
      * @param exterpin the ports component connect, eg: motor_ports.J7
      * @param dir the turn of motor, eg: motor_dir.FWD
-     * @param speed the speed of motor and range from 0 to 1023, eg: 500
+     * @param speed the speed of motor and range from 0 to 255, eg: 255
      */
     //% blockId=coolguy_extermotor_drive
     //% block="Set motor %exterpin|speed %speed| as %dir|" 
-    //% speed.min=0 speed.max=1023
+    //% speed.min=0 speed.max=255
     //% exterpin.fieldEditor="gridpicker" exterpin.fieldOptions.columns=2
     //% exterpin.fieldOptions.tooltips="false" exterpin.fieldOptions.width="150"
     //% group=Motors
@@ -1120,14 +1120,14 @@ namespace Coolguy_basic {
 
         switch (dir) {
             case motor_dir.FWD:
-                pins.analogWritePin(motor_pin2, 0);
-                pins.analogWritePin(motor_pin1, speed);
-                pins.analogSetPeriod(motor_pin1, 20000);
+                pins.analogWritePin(motor_pin1, 0);
+                pins.analogWritePin(motor_pin2, speed*4);
+                pins.analogSetPeriod(motor_pin2, 20000);
                 break;
             case motor_dir.REV:
-                pins.analogWritePin(motor_pin1, 0);
-                pins.analogWritePin(motor_pin2, speed);
-                pins.analogSetPeriod(motor_pin2, 20000);
+                pins.analogWritePin(motor_pin2, 0);
+                pins.analogWritePin(motor_pin1, speed*4);
+                pins.analogSetPeriod(motor_pin1, 20000);
                 break;
             default: break;
         }
@@ -1135,13 +1135,13 @@ namespace Coolguy_basic {
 
     /**
      * Car go straight
-     * @param speed the speed of car, eg: 500
+     * @param speed the speed of car, eg: 255
      * left: IO5/11
      * right: IO8/12
      */
     //% blockId=coolguy_extermotor_go
     //% block="let car go straight at %speed|" 
-    //% speed.min=0 speed.max=1023
+    //% speed.min=0 speed.max=255
     //% group=Motors
     export function exter_motor_go(speed: number): void {
         exter_motor_drive(motor_ports.J7, speed, motor_dir.FWD)
@@ -1150,13 +1150,13 @@ namespace Coolguy_basic {
 
     /**
      * Car go back
-     * @param speed the speed of car, eg: 500
+     * @param speed the speed of car, eg: 255
      * left: IO5/11
      * right: IO8/12
      */
     //% blockId=coolguy_extermotor_back
     //% block="let car go back at %speed|" 
-    //% speed.min=0 speed.max=1023
+    //% speed.min=0 speed.max=255
     //% group=Motors
     export function exter_motor_back(speed: number): void {
         exter_motor_drive(motor_ports.J7, speed, motor_dir.REV)
@@ -1178,13 +1178,13 @@ namespace Coolguy_basic {
 
     /**
      * Car turn left(wheels reverse)
-     * @param speed the speed of wheels, eg: 500
+     * @param speed the speed of wheels, eg: 255
      * left: IO5/11
      * right: IO8/12
      */
     //% blockId=coolguy_extermotor_left
     //% block="let car turn left %speed|" 
-    //% speed.min=0 speed.max=1023
+    //% speed.min=0 speed.max=255
     //% group=Motors
     export function exter_motor_left(speed: number): void {
         exter_motor_drive(motor_ports.J7, speed, motor_dir.REV)
@@ -1193,13 +1193,13 @@ namespace Coolguy_basic {
 
     /**
      * Car turn right(wheels reverse)
-     * @param speed the speed of wheels, eg: 500
+     * @param speed the speed of wheels, eg: 255
      * left: IO5/11
      * right: IO8/12
      */
     //% blockId=coolguy_extermotor_right
     //% block="let car turn right %speed|" 
-    //% speed.min=0 speed.max=1023
+    //% speed.min=0 speed.max=255
     //% group=Motors
     export function exter_motor_right(speed: number): void {
         exter_motor_drive(motor_ports.J7, speed, motor_dir.FWD)
