@@ -1,6 +1,6 @@
 # Coolguy_basic_extension
 
-Coolguy basic extension for Makecode.
+Coolguy basic extension for Makecode. It's micro:bit extension board, which include basic and advanced functionalities like battery module, two DC motor drivers and 5V IO interfaces. What's more the inteface is RJ11 based, it's easy to connect by students and teachers. It can plug Ultrasonic distance module, RGB module and etc, see below for detail. 
 
 ## Feature
 
