@@ -20,6 +20,8 @@ http://www.coolguymaker.com/uploads/download/20201208/1318331361b0545.pdf
 
 ![Product](https://user-images.githubusercontent.com/34023728/99958245-007d8c80-2dc4-11eb-9b37-dc60b6a1a5b9.png)
 
+- ### back
+
 ![back view](https://user-images.githubusercontent.com/34023728/99958253-02dfe680-2dc4-11eb-87b9-5b9311b31110.png)
 
 ## Software Preview
@@ -35,16 +37,12 @@ basic.forever(function () {
 })
 ```
 
-![basic_motor1](https://user-images.githubusercontent.com/34023728/101271897-25a9cc00-37c2-11eb-9b09-7c28076c81c6.png)
-
 ```typescript
 // Move backward at speed 100 forever
 basic.forever(function () {						
     Coolguy_basic.exter_motor_back(100)	
 })
 ```
-
-![basic_motor2](https://user-images.githubusercontent.com/34023728/101271898-280c2600-37c2-11eb-9bf3-c926db4e0ff8.png)
 
 #### Stopping
 
@@ -57,8 +55,6 @@ basic.forever(function () {
 })
 ```
 
-![basic_motor3](https://user-images.githubusercontent.com/34023728/99958398-4c303600-2dc4-11eb-9ee5-e6c6ff0e5e7a.png)
-
 #### Drive motors separately
 
 If you want to perform finer control on a single motor, please use to drive each motor forward or backward. You may specify the speed level from 0 to 255, and you can select forward and reverse. If the rotation speed of the left motor is slower than the rotation speed of the right motor, the robot will rotate to the left.
@@ -70,18 +66,12 @@ basic.forever(function () {
 })
 ```
 
-![basic_motor4](https://user-images.githubusercontent.com/34023728/99958414-4f2b2680-2dc4-11eb-9e76-bae8106c778e.png)
-
 ```typescript
 // Drive left motor in reverse at speed 30
 basic.forever(function () {	
 	Coolguy_basic.exter_motor_drive(motor_ports.J7, 30, motor_dir.REV)
 })
 ```
-
-![basic_motor5](https://user-images.githubusercontent.com/34023728/99958422-52bead80-2dc4-11eb-8a6b-a7775c65ff2b.png)
-
-
 
 ```typescript
 // Drive forward in a leftward curve
@@ -90,8 +80,6 @@ basic.forever(function () {
 	Coolguy_basic.exter_motor_drive(motor_ports.J8, 130, motor_dir.FWD)
 })
 ```
-
-![basic_motor6](https://user-images.githubusercontent.com/34023728/101271900-2b9fad00-37c2-11eb-82cb-ecae46d163f0.png)
 
 ### Beeper
 
@@ -105,8 +93,6 @@ basic.forever(function () {
 })
 ```
 
-![basic_beeper](https://user-images.githubusercontent.com/34023728/99958569-931e2b80-2dc4-11eb-9c91-ee6bfc1073a9.png)
-
 ### Display digits using the digital tube
 
 A digital tube is provided, which can be used to display expected digits using function `Segment_Init(...)`.
@@ -118,8 +104,6 @@ basic.forever(function () {
     Coolguy_basic.coolguy_Set_Segment(8)					
 })
 ```
-
-![basic_segment](https://user-images.githubusercontent.com/34023728/99958600-a29d7480-2dc4-11eb-922c-2c3c841291a7.png)
 
 ### Ultrasonic distance measure
 
@@ -133,8 +117,6 @@ basic.forever(function () {
 })
 ```
 
-![basic_ultrasonic](https://user-images.githubusercontent.com/34023728/99958636-b0eb9080-2dc4-11eb-85e0-8c322ec71828.png)
-
 ### RGB module
 
 RGB module makes it possible to select color and brightness via RGB value. The brightness level is up to 255 with a default value of 120. Do not look directly when the brightness level is high, otherwise, eyes would be damaged. 
@@ -146,8 +128,6 @@ basic.forever(function () {
     Coolguy_basic.coolguy_WS2812_SetRGB(120, 0, 0, 255)
 })
 ```
-
-![basic_RGB](https://user-images.githubusercontent.com/34023728/99958669-c2349d00-2dc4-11eb-8d41-68e68d1f749e.png)
 
 ### Infrared remote control
 
@@ -167,8 +147,6 @@ basic.forever(function () {
     }
 })
 ```
-
-![basic_remote](https://user-images.githubusercontent.com/34023728/99958698-d11b4f80-2dc4-11eb-95f7-77eb5b466696.png)
 
 ## License
 
