@@ -4,8 +4,7 @@
     "description": "Coolguy basic extension",
     "dependencies": {
         "core": "*",
-        "neopixel": "github:Microsoft/pxt-neopixel",
-        "Coolguy_advan_extension": "github:CoolGuy-official/Microbit-advan#v0.1.2"
+        "neopixel": "github:Microsoft/pxt-neopixel"
     },
     "files": [
         "README.md",
